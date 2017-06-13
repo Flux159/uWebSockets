@@ -6,7 +6,6 @@ environment:
 
 platform:
   - x64
-  - x86
 
 shallow_clone: true
 
@@ -18,6 +17,11 @@ install:
   - cmd: .\vcpkg integrate install
   - cmd: vcpkg install openssl zlib libuv
 
+build: off
+
 # Use msbuild.exe to build the VC++ project from commandline
 # https://msdn.microsoft.com/en-us/library/f35ctcxw.aspx
-build:
+build_script:
+  - cmd: >-
+    cd .\nodejs
+    make.bat
