@@ -9,7 +9,7 @@ platform:
 
 shallow_clone: true
 
-# Install vcpkg and install deps: https://github.com/appveyor/ci/issues/1076
+# Install vcpkg and install deps
 install:
   - cmd: git clone https://github.com/Microsoft/vcpkg.git
   - cmd: cd vcpkg
@@ -19,8 +19,6 @@ install:
 
 build: off
 
-# Use msbuild.exe to build the VC++ project from commandline
-# https://msdn.microsoft.com/en-us/library/f35ctcxw.aspx
 build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: cd .\nodejs
