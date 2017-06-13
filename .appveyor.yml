@@ -22,6 +22,5 @@ build: off
 # Use msbuild.exe to build the VC++ project from commandline
 # https://msdn.microsoft.com/en-us/library/f35ctcxw.aspx
 build_script:
-  - cmd: >-
-    cd .\nodejs
-    make.bat
+  - cmd: cd nodejs
+  - cmd: make.bat
