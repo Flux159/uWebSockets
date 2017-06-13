@@ -1,44 +1,42 @@
 
 var exec = require('child_process').exec;
+var path = require('path');
 var packageJson = require('./package.json');
 
-// Run in cmd or in bash
-// https://stackoverflow.com/questions/32971416/cross-platform-npm-start-script
-// node-gyp rebuild > build_log.txt 2>&1 || exit 0
 var command_line = 'node-gyp rebuild > build_log.txt 2>&1 || exit 0';
-// var environ = (!process.argv[2].indexOf('development')) ? 'development' : 'production';
 
-var command = exec(command_line, function(error, stdout, stderr) {
+var githubUsername = 'Flux159';
+var githubProjectName = 'uWebSockets';
+var version = 'v' + packageJson.version;
+var platform = process.platform;
+var nodeVersion = process.versions.modules;
+
+var fileName = 'uws_' + platform +'_' + nodeVersion + '.node';
+var urlLink = 'https://github.com/' + githubProjectName + '/' +
+    projectName + '/releases/download/' + version + '/' + fileName;
+var windowsPath = path.resolve(__dirname, './' + fileName);
+
+var curlCommand = 'curl -O ' + urlLink;
+// Note that powershell 3.0 allows you to use wget, but this command can work on
+// Powershell 2.0 (.NET 2.0)
+var powershellCommand = '(new-object System.Net.WebClient).DownloadFile( "'+
+    urlLink + '", "' + windowsPath + '")';
+
+var command = exec(command_line, function (error, stdout, stderr) {
+    // Errors won't happen because 2>&1 and || exit 0 will almost always succeed
+    if (error) { }
+
     // Download binary if command failed (using curl or powershell download file)
-
-    // Throw error to stderr if download and binary build failed
+    // Note that currently this always downloads
+    if (process.platform === 'win32') {
+        exec(powershellCommand, function(error, stdout, stderr) {
+            // Ignore errors for now, if download fails, then runtime (see uws.js) will fail
+            // Proper way of handling this would be to throw error to stderr
+        });
+    } else {
+        exec(curlCommand, function (error, stdout, stderr) {
+            // Ignore errors for now, if download fails, then runtime (see uws.js) will fail
+            // Proper way of handling this would be to throw error to stderr
+        });
+    }
 });
-
-// if(process.platform === 'win32') {
-//   // tricks : https://github.com/remy/nodemon/issues/184#issuecomment-87378478 (Just don't add the space after the NODE_ENV variable, just straight to &&:)      
-//   command_line = 'set NODE_ENV=' + environ + '&& ' + command_line;
-// } else {
-//   command_line = 'NODE_ENV=' + environ + ' ' + command_line;
-// }
-
-// Just use curl or wget from command line
-// Windows wget in powershell is just an alias for another command:
-// https://stackoverflow.com/questions/36274084/how-to-execute-windows-powershell-command-using-childprocess-and-nodejs
-// https://superuser.com/questions/362152/native-alternative-to-wget-in-windows-powershell
-
-// command.stdout.on('data', function(data) {
-//   process.stdout.write(data);
-// });
-// command.stderr.on('data', function(data) {
-//   process.stderr.write(data);
-// });
-// command.on('error', function(err) {
-//   process.stderr.write(err);
-// });
-
-// Need to handle cross platform download of binary if node-gyp fails
-// Technically would want to use node-pre-gyp or request module since those are
-// more thoroughly tested (and deal w/ proxies, etc.). See node-sass install script
-
-// Alternatively could just exec curl and throw an error to stdout if curl doesn't 
-// exist - same as node-gyp rebuild then
