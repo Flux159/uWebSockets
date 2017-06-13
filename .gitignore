@@ -1,4 +1,7 @@
-nodejs/dist
+nodejs/dist/*
+!nodejs/dist/package.json
+!nodejs/dist/binding.gyp
+!nodejs/dist/install.js
 nodejs/targets
 .DS_Store
 
