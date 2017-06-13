@@ -29,12 +29,16 @@ before_install:
 install:
   - "cd nodejs && make && cd .."
 
+# For some reason travis is running a default make test: https://stackoverflow.com/questions/34571571/dont-run-make-test-as-a-part-of-travis-ci
+script:
+  - ":"
+
 # Release to github if tagged: See docs: https://docs.travis-ci.com/user/deployment/releases/
 # Note: The api_key: secure: is NOT the raw github api token. It is the encrptyed token generated
 # by the travis cli 'encrypt' method. See these docs (there are separate docs for appveyor):
 # https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/
 # https://docs.travis-ci.com/user/encryption-keys/
-# Note that when creating a token in githb, only public_repo access is needed
+# Note that when creating a token in github, only public_repo access is needed
 deploy:
   provider: releases
   api_key:
