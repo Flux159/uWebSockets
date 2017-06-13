@@ -34,10 +34,11 @@ install:
 # by the travis cli 'encrypt' method. See these docs (there are separate docs for appveyor):
 # https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/
 # https://docs.travis-ci.com/user/encryption-keys/
+# Note that when creating a token in githb, only public_repo access is needed
 deploy:
   provider: releases
   api_key:
-    secure: GITHUB_OAUTH_API_KEY_ENCRYPTED
+    secure: "vj2yrJ2+SzrynYRMZ/tC2UH3ZdCpxhAW5atMmqQeytLJaT6kNmLyYbAM5HEU9n9bFFhEtWiH86wxk5X5k17YDV0NfrBVnOZ7Yy6XYsQENTxTpeJO3tBlItsfL/hF2Re4AOJLZtJmNE73hGM2VMtCfA4VQPrls9USah/Qjn63TMGL2mtsaus9ihStOrVz+5KB5n2jUWEzjTqxHXojUKjL+Ts1K2LUR5tdAapiYuUbPl6OwDLcxXJSpwmJATDcJvQl+oTmVIziuY9MF9/DqQ+0VTo48YFkdHPVRwEGObM/iwKExwcRQp/VwzxCVV9M9UCZfbOfTe3V2B+eLfMwS3zBcIlxSNdj3PpptCMLz9eMkMsTLty2ikRBU9PRXC61jhwFOlZUNwob/Y/TQry/9WrjAq9bpUTsGc72Cs4ZU9cNFnPIC2WEi7H4oadDCRMr4euzy58DgRaQBdY2Lv5le0RZ41RFPme98F6H7oJ/AwMom5KFmZVhSaH7pw8kF8UCY+xAEKJ0/AUg+ljdm2Pfcj45MUJH8cej1k/T4Hp9x0wLq4sVGRpYbqeccg0p/zyYIqYzk4Qgz0xTu1rgZ3IqW7V+HCUOHukJ+FWgn9OPJC3Q1amcmtIpnT5Wtqf6PeTyxky3VuHiOkTtJ6K8Ysce6hqLut4alwm6zbTWbRrEIvsu67I="
   file_glob: true
   file: ./nodejs/*.node
   skip_cleanup: true
