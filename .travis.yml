@@ -31,7 +31,7 @@ install:
 
 # For some reason travis is running a default make test: https://stackoverflow.com/questions/34571571/dont-run-make-test-as-a-part-of-travis-ci
 script:
-  - ":"
+  - "mv nodejs/dist/*.node nodejs/"
 
 # Release to github if tagged: See docs: https://docs.travis-ci.com/user/deployment/releases/
 # Note: The api_key: secure: is NOT the raw github api token. It is the encrptyed token generated
@@ -40,8 +40,7 @@ script:
 # https://docs.travis-ci.com/user/encryption-keys/
 # Note that when creating a token in github, only public_repo access is needed
 before_deploy:
-  - "mv nodejs/dist/*.node nodejs/"
-  - "cd nodejs/dist"
+  - "cd $TRAVIS_BUILD_DIR/nodejs/dist"
 deploy:
   - provider: releases
     api_key:

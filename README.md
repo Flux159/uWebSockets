@@ -1,4 +1,14 @@
 
+# uws-light
+
+```
+npm install uws-light
+```
+
+A fork of [uWebSockets](https://github.com/uWebSockets/uWebSockets) that adds CI/CD and deploys binaries to github instead of packaging binaries in npm download.
+
+See https://github.com/uNetworking/uWebSockets/issues/626. Want to get this merged upstream for better uWebSocket builds.
+
 <div align="center"><img src="misc/images/logo.png"/></div>
 
 `µWS` is one of the most lightweight, efficient & scalable WebSocket & HTTP server implementations available. It features an easy-to-use, fully async object-oriented interface and scales to millions of connections using only a fraction of memory compared to the competition. While performance and scalability are two of our top priorities, we consider security, stability and standards compliance paramount. License is zlib/libpng (very permissive & suits commercial applications).
