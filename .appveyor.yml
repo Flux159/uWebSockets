@@ -1,0 +1,23 @@
+
+# image: Visual Studio 2015
+
+environment:
+  nodejs_version: "8"
+
+platform:
+  - x64
+  - x86
+
+shallow_clone: true
+
+# Install vcpkg and install deps: https://github.com/appveyor/ci/issues/1076
+install:
+  - cmd: git clone https://github.com/Microsoft/vcpkg.git
+  - cmd: cd vcpkg
+  - cmd: .\bootstrap-vcpkg.bat
+  - cmd: .\vcpkg integrate install
+  - cmd: vcpkg install openssl zlib libuv
+
+# Use msbuild.exe to build the VC++ project from commandline
+# https://msdn.microsoft.com/en-us/library/f35ctcxw.aspx
+build:

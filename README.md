@@ -1,16 +1,3 @@
-Note: This is a fork of https://github.com/uNetworking/uWebSockets because the developer doesn't want to decouple prebuilt nodejs bindings from his NPM package and blames NPM: 
-
-https://github.com/uNetworking/uWebSockets/issues/626
-https://github.com/uNetworking/uWebSockets/issues/54
-https://github.com/uNetworking/uWebSockets/issues/285
-https://github.com/uNetworking/uWebSockets/issues/401
-
-This project also removes the git submodules so that the bindings and the uWebSockets projects are unified under one repo.
-
-Installing via NPM:
-```
-uws-better
-```
 
 <div align="center"><img src="misc/images/logo.png"/></div>
 
