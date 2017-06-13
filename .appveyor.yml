@@ -45,3 +45,8 @@ deploy:
   artifact: windowsbinaries
   on:
     appveyor_repo_tag: true 
+
+# Note: Workflow for appveyor: 
+# git push # Push changes to master, run CI, make sure it works & passes all tests
+# git tag -a v0.20.0 -m 'Version 0.20.0'
+# git push --tags # Push tags independently after push to master, run CI and deploy

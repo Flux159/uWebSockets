@@ -1,8 +1,8 @@
 {
-  "name": "uws",
-  "version": "0.14.5",
+  "name": "uws-light",
+  "version": "0.1.0",
   "scripts": {
-    "install": "node scripts/install.js"
+    "install": "node install.js"
   },
   "main": "uws.js",
   "description": "Tiny WebSockets",

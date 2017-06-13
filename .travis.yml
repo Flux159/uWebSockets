@@ -50,3 +50,14 @@ deploy:
     tags: true
 
 # Clean nodejs/dist/*.node and deploy to npm with version tag
+before_deploy:
+  - "cd nodejs/dist"
+  - "rm *.node"
+deploy:
+  provider: npm
+  api_key:
+    secure: "Dlp1cFJTI6j2kfPXi6MNTknXf+/63Szy/1CV7/lYASMwezlzQ50hflogEhfCxBj1BLW/UP0eFmcoYRYm7XodFwc/F2Oei1VwSBJnH/EzQYi55PW2XiwvpE5Eph7xl/gsuGBHvOkdiNBJRJgc4Eqbg69GidSw+Nmfw6w0VDo+9kb6oPfpS/0nRq909iarwLNLaUuHDlJfY5m0g809MOwFjS00a4TcYMf1WMlkhz79i0iymAc5CONkAF9q1Zr43BdsCNb2PXh65aKpBze4ZU7RqgPjvfP33bVxcDh5UNw/yzVVDOuPyA7SkvdGp7j7cdQbMza554CsXIJ0aONvgBRyrEUqCsrpc56nikFuJeHChSpNbO1v+J2o9XWx3EtvGB7SbM1vCrcTw9VfBubkagGPgcvSn8yU6Q9FCsakJegTnbf7ewY4CDu0BIBI8UBfwpHVz5QKEWjt1UvJyLLHr2Ui3B3cnjT7AMzJg7neIR0ldj1GnGb6P2en8z4+4lWDeWmVUfgp9OVCSs6s+m+2L7omxtdc+LttWGxaXRMmBXXIdei1uyO3jvEb0zEmeWqBxi5rhXz6f1Q2cnt01+wBxyuhHwoDpp8UuBRsAlo8hZi3d5X/1vq2/OmhvADIT2Q5Lt3gLq8+b0Bi/aKVlfbdeiDesbVhDxgrOondNgEZTK7/YxE="
+  skip_cleanup: true
+  on:
+    tags: true
+    condition: $TRAVIS_OS_NAME = osx
