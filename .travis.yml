@@ -39,25 +39,22 @@ script:
 # https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/
 # https://docs.travis-ci.com/user/encryption-keys/
 # Note that when creating a token in github, only public_repo access is needed
-deploy:
-  provider: releases
-  api_key:
-    secure: "vj2yrJ2+SzrynYRMZ/tC2UH3ZdCpxhAW5atMmqQeytLJaT6kNmLyYbAM5HEU9n9bFFhEtWiH86wxk5X5k17YDV0NfrBVnOZ7Yy6XYsQENTxTpeJO3tBlItsfL/hF2Re4AOJLZtJmNE73hGM2VMtCfA4VQPrls9USah/Qjn63TMGL2mtsaus9ihStOrVz+5KB5n2jUWEzjTqxHXojUKjL+Ts1K2LUR5tdAapiYuUbPl6OwDLcxXJSpwmJATDcJvQl+oTmVIziuY9MF9/DqQ+0VTo48YFkdHPVRwEGObM/iwKExwcRQp/VwzxCVV9M9UCZfbOfTe3V2B+eLfMwS3zBcIlxSNdj3PpptCMLz9eMkMsTLty2ikRBU9PRXC61jhwFOlZUNwob/Y/TQry/9WrjAq9bpUTsGc72Cs4ZU9cNFnPIC2WEi7H4oadDCRMr4euzy58DgRaQBdY2Lv5le0RZ41RFPme98F6H7oJ/AwMom5KFmZVhSaH7pw8kF8UCY+xAEKJ0/AUg+ljdm2Pfcj45MUJH8cej1k/T4Hp9x0wLq4sVGRpYbqeccg0p/zyYIqYzk4Qgz0xTu1rgZ3IqW7V+HCUOHukJ+FWgn9OPJC3Q1amcmtIpnT5Wtqf6PeTyxky3VuHiOkTtJ6K8Ysce6hqLut4alwm6zbTWbRrEIvsu67I="
-  file_glob: true
-  file: nodejs/dist/*.node
-  skip_cleanup: true
-  on:
-    tags: true
-
-# Clean nodejs/dist/*.node and deploy to npm with version tag
 before_deploy:
+  - "mv nodejs/dist/*.node nodejs/"
   - "cd nodejs/dist"
-  - "rm *.node"
 deploy:
-  provider: npm
-  api_key:
-    secure: "Dlp1cFJTI6j2kfPXi6MNTknXf+/63Szy/1CV7/lYASMwezlzQ50hflogEhfCxBj1BLW/UP0eFmcoYRYm7XodFwc/F2Oei1VwSBJnH/EzQYi55PW2XiwvpE5Eph7xl/gsuGBHvOkdiNBJRJgc4Eqbg69GidSw+Nmfw6w0VDo+9kb6oPfpS/0nRq909iarwLNLaUuHDlJfY5m0g809MOwFjS00a4TcYMf1WMlkhz79i0iymAc5CONkAF9q1Zr43BdsCNb2PXh65aKpBze4ZU7RqgPjvfP33bVxcDh5UNw/yzVVDOuPyA7SkvdGp7j7cdQbMza554CsXIJ0aONvgBRyrEUqCsrpc56nikFuJeHChSpNbO1v+J2o9XWx3EtvGB7SbM1vCrcTw9VfBubkagGPgcvSn8yU6Q9FCsakJegTnbf7ewY4CDu0BIBI8UBfwpHVz5QKEWjt1UvJyLLHr2Ui3B3cnjT7AMzJg7neIR0ldj1GnGb6P2en8z4+4lWDeWmVUfgp9OVCSs6s+m+2L7omxtdc+LttWGxaXRMmBXXIdei1uyO3jvEb0zEmeWqBxi5rhXz6f1Q2cnt01+wBxyuhHwoDpp8UuBRsAlo8hZi3d5X/1vq2/OmhvADIT2Q5Lt3gLq8+b0Bi/aKVlfbdeiDesbVhDxgrOondNgEZTK7/YxE="
-  skip_cleanup: true
-  on:
-    tags: true
-    condition: $TRAVIS_OS_NAME = osx
+  - provider: releases
+    api_key:
+      secure: "vj2yrJ2+SzrynYRMZ/tC2UH3ZdCpxhAW5atMmqQeytLJaT6kNmLyYbAM5HEU9n9bFFhEtWiH86wxk5X5k17YDV0NfrBVnOZ7Yy6XYsQENTxTpeJO3tBlItsfL/hF2Re4AOJLZtJmNE73hGM2VMtCfA4VQPrls9USah/Qjn63TMGL2mtsaus9ihStOrVz+5KB5n2jUWEzjTqxHXojUKjL+Ts1K2LUR5tdAapiYuUbPl6OwDLcxXJSpwmJATDcJvQl+oTmVIziuY9MF9/DqQ+0VTo48YFkdHPVRwEGObM/iwKExwcRQp/VwzxCVV9M9UCZfbOfTe3V2B+eLfMwS3zBcIlxSNdj3PpptCMLz9eMkMsTLty2ikRBU9PRXC61jhwFOlZUNwob/Y/TQry/9WrjAq9bpUTsGc72Cs4ZU9cNFnPIC2WEi7H4oadDCRMr4euzy58DgRaQBdY2Lv5le0RZ41RFPme98F6H7oJ/AwMom5KFmZVhSaH7pw8kF8UCY+xAEKJ0/AUg+ljdm2Pfcj45MUJH8cej1k/T4Hp9x0wLq4sVGRpYbqeccg0p/zyYIqYzk4Qgz0xTu1rgZ3IqW7V+HCUOHukJ+FWgn9OPJC3Q1amcmtIpnT5Wtqf6PeTyxky3VuHiOkTtJ6K8Ysce6hqLut4alwm6zbTWbRrEIvsu67I="
+    file_glob: true
+    file: ../*.node
+    skip_cleanup: true
+    on:
+      tags: true
+  - provider: npm
+    api_key:
+      secure: "Dlp1cFJTI6j2kfPXi6MNTknXf+/63Szy/1CV7/lYASMwezlzQ50hflogEhfCxBj1BLW/UP0eFmcoYRYm7XodFwc/F2Oei1VwSBJnH/EzQYi55PW2XiwvpE5Eph7xl/gsuGBHvOkdiNBJRJgc4Eqbg69GidSw+Nmfw6w0VDo+9kb6oPfpS/0nRq909iarwLNLaUuHDlJfY5m0g809MOwFjS00a4TcYMf1WMlkhz79i0iymAc5CONkAF9q1Zr43BdsCNb2PXh65aKpBze4ZU7RqgPjvfP33bVxcDh5UNw/yzVVDOuPyA7SkvdGp7j7cdQbMza554CsXIJ0aONvgBRyrEUqCsrpc56nikFuJeHChSpNbO1v+J2o9XWx3EtvGB7SbM1vCrcTw9VfBubkagGPgcvSn8yU6Q9FCsakJegTnbf7ewY4CDu0BIBI8UBfwpHVz5QKEWjt1UvJyLLHr2Ui3B3cnjT7AMzJg7neIR0ldj1GnGb6P2en8z4+4lWDeWmVUfgp9OVCSs6s+m+2L7omxtdc+LttWGxaXRMmBXXIdei1uyO3jvEb0zEmeWqBxi5rhXz6f1Q2cnt01+wBxyuhHwoDpp8UuBRsAlo8hZi3d5X/1vq2/OmhvADIT2Q5Lt3gLq8+b0Bi/aKVlfbdeiDesbVhDxgrOondNgEZTK7/YxE="
+    skip_cleanup: true
+    on:
+      tags: true
+      condition: $TRAVIS_OS_NAME = osx
