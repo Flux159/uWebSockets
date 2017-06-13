@@ -38,6 +38,6 @@ deploy:
   provider: GitHub
   auth_token:
     secure: tNG9L5Q3V6WFifc1nlTplAKJPd6Xyk/y/yZ6WimLXtBwUUm3oX4LUmg3qZdkUUDF
-  artifact: .\nodejs\*.node
+  artifact: .\nodejs\dist\*.node
   on:
     appveyor_repo_tag: true
